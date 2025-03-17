@@ -22,29 +22,26 @@ key request_id_name;
 key request_id_online;
 key id;
 integer noSpammy;
-string hailsObjName;
-string objOwner;
 integer scriptState;
 string hailsAlert = "66abf077-3bb0-fc76-f209-8ad7317121ac";
 string whotocheck;
 string objdesc;
+string hailsObjName;
+string objOwner;
 
 default
 {
     on_rez(integer start_param) {
-        llSleep(0.75); 
-        llResetScript(); 
+        llSleep(0.75); hailsObjName = "hails.Sentinel"; llSetObjectName(hailsObjName); llResetScript(); 
     }
 
     changed(integer change) {
         if (change & (CHANGED_OWNER | CHANGED_INVENTORY | CHANGED_REGION)) {
-            hailsObjName= "hails.Sentinel";
+            llStopSound(); hailsObjName = "hails.Sentinel"; llSetObjectName(hailsObjName);
             if (debug) {  
                 llOwnerSay(hailsObjName + " Now Rebooting. . ."); 
             }
-            llStopSound();
-            llSleep(0.75); 
-            llResetScript(); 
+            llSleep(0.75); llResetScript(); 
         }
     }
 
@@ -54,24 +51,23 @@ default
         id = llGetOwner(); 
         objdesc = llGetObjectDesc();
         if (objdesc == "one") { whotocheck = firstID; } else if (objdesc == "two") { whotocheck = secondID; } else { whotocheck = objdesc; }
-        objOwner = llKey2Name(id); hailsObjName= "hails.Sentinel"; llSetObjectName(hailsObjName); llSetScriptState(scriptRGB, FALSE); 
+        objOwner = llKey2Name(id); hailsObjName = "hails.Sentinel"; llSetScriptState(scriptRGB, FALSE); 
         llSetScriptState(scriptBlink, TRUE); 
         llSetColor(<0.0, 0.0, 0.0>, ALL_SIDES); llSetTexture(blank, ALL_SIDES); llSetAlpha(0.1, ALL_SIDES);
         request_id_name = llRequestAgentData(whotocheck, DATA_NAME);
         if (debug) { 
             llOwnerSay(hailsObjName + " Initializing Silent Sentinel. . ."); 
         } 
-        llSetTimerEvent(20); 
+        llSetTimerEvent(20); llSetObjectName(hailsObjName);
     }
     
     touch_start(integer num) { 
-        llStopSound();
-        llOwnerSay("Currently Monitoring: " + whotocheck); 
+        llStopSound(); llSetObjectName(hailsObjName); llOwnerSay("Currently Monitoring: " + whotocheck); 
         llOwnerSay("Detach/Re-attach if Sentinel is not responding."); 
     } 
 
     timer() { 
-        request_id_online = llRequestAgentData(whotocheck, DATA_ONLINE); 
+        request_id_online = llRequestAgentData(whotocheck, DATA_ONLINE); hailsObjName = "hails.Sentinel";
     } 
 
     dataserver(key queryid, string data) {
@@ -86,27 +82,21 @@ default
                     llOwnerSay(hailsObjName + "Silent Sentinel has received an online status for UUID requested."); 
                 }
                 if (scriptState != 0) {
-                    llSetScriptState(scriptBlink, TRUE); 
-                    llSetScriptState(scriptRGB, FALSE);
+                    llSetScriptState(scriptBlink, TRUE); hailsObjName = "hails.Sentinel"; llSetScriptState(scriptRGB, FALSE);
                     if (verbose_debug) {  
                             llOwnerSay( "Set " + scriptRGB + " to 0 from " + (string)scriptState); 
                         }
                     scriptState = 0;
                 }
-                llSetTexture(blank, ALL_SIDES); 
-                llSetColor(<0.9, 0.0, 0.0>, ALL_SIDES);
-                llSetAlpha(0.5, ALL_SIDES);
+                llSetTexture(blank, ALL_SIDES); hailsObjName = "hails.Sentinel"; llSetColor(<0.9, 0.0, 0.0>, ALL_SIDES); llSetAlpha(0.5, ALL_SIDES);
 
                 if (llGetAgentSize(whotocheck)) { 
-                    llSetColor(<1.0, 1.0, 0.2>, ALL_SIDES); 
-                    llSetTexture(alert, ALL_SIDES);
-                    llSetAlpha(1.0, ALL_SIDES);
+                    llSetColor(<1.0, 1.0, 0.2>, ALL_SIDES); llSetTexture(alert, ALL_SIDES); hailsObjName = "hails.Sentinel"; llSetAlpha(1.0, ALL_SIDES);
                     
                     if (noSpammy <= 1) {
                         noSpammy = 5; 
                         string regionName = llGetRegionName();
-                        llLoopSound(hailsAlert, 0.9);
-                        llOwnerSay("Attention " + objOwner + ", Sensors have found " + llKey2Name(whotocheck) + " entering Sim " + regionName);
+                        llLoopSound(hailsAlert, 0.9); hailsObjName = "hails.Sentinel"; llOwnerSay("Attention " + objOwner + ", Sensors have found " + llKey2Name(whotocheck) + " entering Sim " + regionName);
                     } else {
                         --noSpammy;
                         if (verbose_debug) {  
@@ -126,7 +116,7 @@ default
                         }
                     }
                 }
-                llStopSound();
+                llStopSound(); llSetObjectName(hailsObjName);
                 llSetTexture(blank, ALL_SIDES);
                 if (scriptState != 1) {
                     llSetScriptState(scriptBlink, FALSE); 
