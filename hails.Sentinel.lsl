@@ -7,6 +7,9 @@
 integer debug = TRUE;         // THESE WILL SPAM YOU IF ENABLED
 integer verbose_debug = FALSE; // THESE WILL SPAM YOU IF ENABLED
 
+string firstID = "00000000-0000-0000-0000-000000000000"; // UUID of first avatar to monitor for
+string secondID = "00000000-0000-0000-0000-000000000000"; // UUID of second avatar to monitor for
+
 // LEAVE THE REST ALONE
 // SERIOUSLY.
 key blank = TEXTURE_BLANK;
@@ -22,8 +25,6 @@ string scriptRGB = "hails.rainbow.allSides";  //RGB Script https://github.com/Ha
 string scriptBlink = "hails.blinker"; // hails.blink Script https://github.com/Hailey-Ross/hails.Sentinel/blob/main/hails.blink
 integer scriptState;
 string hailsAlert = "66abf077-3bb0-fc76-f209-8ad7317121ac";
-string firstID = "00000000-0000-0000-0000-000000000000"; // UUID of first avatar to monitor for
-string secondID = "00000000-0000-0000-0000-000000000000"; // UUID of second avatar to monitor for
 string whotocheck;
 string objdesc;
 
