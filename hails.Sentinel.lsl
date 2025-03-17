@@ -81,7 +81,7 @@ default
             llOwnerSay("Sentinel is now Online\n Monitoring: " + data); hailsObjName= "hails.Sentinel";
         } else if (queryid == request_id_online) {
             if ((integer)data == 1) {
-                if (verbose_debug) { //used to be verbose_debug
+                if (verbose_debug) { 
                     llOwnerSay(hailsObjName + "Silent Sentinel has received an online status for UUID requested."); 
                 }
                 if (scriptState != 0) {
