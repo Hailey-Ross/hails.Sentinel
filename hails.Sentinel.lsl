@@ -4,7 +4,7 @@
 // PLEASE LEAVE ALL CREDITS/COMMENTS INTACT
 // Avoid those that have wronged you in SL
 
-integer debug = TRUE;         // THESE WILL SPAM YOU IF ENABLED
+integer debug = FALSE;         // THESE WILL SPAM YOU IF ENABLED
 integer verbose_debug = FALSE; // THESE WILL SPAM YOU IF ENABLED
 
 string firstID = "00000000-0000-0000-0000-000000000000"; // UUID of first avatar to monitor for
