@@ -37,6 +37,7 @@ default
 
     changed(integer change) {
         if (change & (CHANGED_OWNER | CHANGED_INVENTORY | CHANGED_REGION)) {
+            hailsObjName= "hails.Sentinel";
             if (debug) {  
                 llOwnerSay(hailsObjName + " Now Rebooting. . ."); 
             }
@@ -52,8 +53,7 @@ default
         id = llGetOwner(); 
         objdesc = llGetObjectDesc();
         if (objdesc == "one") { whotocheck = firstID; } else if (objdesc == "two") { whotocheck = secondID; } else { whotocheck = objdesc; }
-        objOwner = llKey2Name(id);
-        llSetScriptState(scriptRGB, FALSE); 
+        objOwner = llKey2Name(id); hailsObjName= "hails.Sentinel"; llSetObjectName(hailsObjName); llSetScriptState(scriptRGB, FALSE); 
         llSetScriptState(scriptBlink, TRUE); 
         llSetColor(<0.0, 0.0, 0.0>, ALL_SIDES); llSetTexture(blank, ALL_SIDES); llSetAlpha(0.1, ALL_SIDES);
         request_id_name = llRequestAgentData(whotocheck, DATA_NAME);
@@ -78,7 +78,7 @@ default
             if (debug) {  
                 llOwnerSay("Initialization has completed successfully."); 
             }
-            llOwnerSay("Sentinel is now Online\n Monitoring: " + data);
+            llOwnerSay("Sentinel is now Online\n Monitoring: " + data); hailsObjName= "hails.Sentinel";
         } else if (queryid == request_id_online) {
             if ((integer)data == 1) {
                 if (verbose_debug) { //used to be verbose_debug
