@@ -8,7 +8,7 @@ integer debug = FALSE;         // THESE WILL SPAM YOU IF ENABLED
 integer verbose_debug = FALSE; // THESE WILL SPAM YOU IF ENABLED
 
 string scriptRGB = "hails.rgb";  // Name of the RGB script | https://github.com/Hailey-Ross/hails.rgb
-string scriptBlink = "hails.blinker"; // Name of the blinking script | https://github.com/Hailey-Ross/hails.Sentinel/blob/main/hails.blink
+string scriptBlink = "hails.blink"; // Name of the blinking script | https://github.com/Hailey-Ross/hails.Sentinel/blob/main/hails.blink
 
 string firstID = "00000000-0000-0000-0000-000000000000"; // UUID of first avatar to monitor for
 string secondID = "00000000-0000-0000-0000-000000000000"; // UUID of second avatar to monitor for
